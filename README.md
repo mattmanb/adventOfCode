@@ -9,3 +9,8 @@ Password 2 is: 5899
 Execution time (seconds): 0.49498296  
 Part 1 Sum: 23039913998  
 Part 2 Sum: 35950619148  
+  
+## day 3
+Execution time (seconds): 0.013149865  
+Sum: 17321  
+Sum2: 171989894144198  
