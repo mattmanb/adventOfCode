@@ -35,26 +35,28 @@ fn main() -> io::Result<()> {
         let mut r_cutoff = digits.len() - 12;
         let mut lgst12: Vec<u32> = digits[r_cutoff..].to_vec();
         let mut l_cutoff: usize = 0;
-        for i in 0..12 {
-            let ind_of_largest = digits[l_cutoff..r_cutoff]
-                .iter()
-                .rev()
-                .enumerate()
-                .max_by_key(|&(_, &val)| val)
-                .map(|(rev_index, _)| {
-                    l_cutoff + (r_cutoff - l_cutoff) - 1 - rev_index
-                });
-            match ind_of_largest {
-                Some(ind) => {
-                    if digits[ind] > lgst12[i] {
-                        lgst12[i] = digits[ind];
-                        l_cutoff = ind + 1;
-                        r_cutoff += 1;
-                    } else {
-                        break;
-                    }
-                },
-                None => break,
+        if digits.len() > 12 {
+            for i in 0..12 {
+                let ind_of_largest = digits[l_cutoff..r_cutoff]
+                    .iter()
+                    .rev()
+                    .enumerate()
+                    .max_by_key(|&(_, &val)| val)
+                    .map(|(rev_index, _)| {
+                        l_cutoff + (r_cutoff - l_cutoff) - 1 - rev_index
+                    });
+                match ind_of_largest {
+                    Some(ind) => {
+                        if digits[ind] >= lgst12[i] {
+                            lgst12[i] = digits[ind];
+                            l_cutoff = ind + 1;
+                            r_cutoff += 1;
+                        } else {
+                            break;
+                        }
+                    },
+                    None => break,
+                }
             }
         }
         // Concatenate the lgst12 vector of numbers into an int and add it to the sum
